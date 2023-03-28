@@ -4,10 +4,10 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 #loading the saved model
-diabetes_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Diabetes_model.sav','rb'))
-heart_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Heart_model.sav','rb'))
-parkinson_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Parkinson_model.sav','rb'))
-Breast_Cancer_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Breast_model.sav','rb'))
+diabetes_model=pickle.load(open('Diabetes_model.sav','rb'))
+heart_model=pickle.load(open('Heart_model.sav','rb'))
+parkinson_model=pickle.load(open('Parkinson_model.sav','rb'))
+Breast_Cancer_model=pickle.load(open('Breast_model.sav','rb'))
 #sidebar for navigate
 with st.sidebar:
     selected=option_menu('Disease Prediction System',
