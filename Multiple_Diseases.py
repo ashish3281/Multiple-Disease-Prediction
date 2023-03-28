@@ -4,10 +4,10 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 #loading the saved model
-diabetes_model=pickle.load(open('Diabetes_model.sav','rb'))
-heart_model=pickle.load(open('Heart_model.sav','rb'))
-parkinson_model=pickle.load(open('Parkinson_model.sav','rb'))
-Breast_Cancer_model=pickle.load(open('Breast_model.sav','rb'))
+diabetes_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Diabetes_model.sav','rb'))
+heart_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Heart_model.sav','rb'))
+parkinson_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Parkinson_model.sav','rb'))
+Breast_Cancer_model=pickle.load(open('C:/Users/HP/OneDrive/Desktop/ML projects/Breast_model.sav','rb'))
 #sidebar for navigate
 with st.sidebar:
     selected=option_menu('Disease Prediction System',
@@ -142,8 +142,8 @@ if(selected == 'Breast Cancer'):
     symmetry=st.text_input('mean symmetry')
     dimension=st.text_input('mean fractal dimension')
     error=st.text_input('radius error')
-    texture =st.text_input('texture error')
-    perimeter =st.text_input('perimeter error')
+    texture_error =st.text_input('texture error')
+    perimeter_error =st.text_input('perimeter error')
     area_error=st.text_input('area error')
     smoothness_error=st.text_input('smoothness error')
     compactness_error=st.text_input('compactness error')
@@ -168,7 +168,7 @@ if(selected == 'Breast Cancer'):
     # creating a button for Prediction
     
     if st.button('Breast Cancer Classification Result'):
-        Breast_prediction = heart_model.predict([[radius,texture,perimeter,area,smoothness,compactness,concavity,points,symmetry,dimension,error,texture,perimeter,area_error,smoothness_error,compactness_error,concavity_error,points_error,symmetry_error,dimension_error,worst_radius,worst_texture,worst_perimeter,worst_area,worst_smoothness,worst_compactness,worst_concavity,concave_points,worst_symmetry,fractal_dimension]])                          
+        Breast_prediction = Breast_Cancer_model.predict([[radius,texture,perimeter,area,smoothness,compactness,concavity,points,symmetry,dimension,error,texture_error,perimeter_error,area_error,smoothness_error,compactness_error,concavity_error,points_error,symmetry_error,dimension_error,worst_radius,worst_texture,worst_perimeter,worst_area,worst_smoothness,worst_compactness,worst_concavity,concave_points,worst_symmetry,fractal_dimension]])                          
         
         if (Breast_prediction[0] == 1):
           Breast_diagnosis = 'The Breast Cancer is Benign'
