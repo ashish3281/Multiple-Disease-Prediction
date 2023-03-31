@@ -1,5 +1,4 @@
 import pickle
-
 import streamlit as st 
 from streamlit_option_menu import option_menu
 
@@ -8,16 +7,19 @@ diabetes_model=pickle.load(open('Diabetes_model.sav','rb'))
 heart_model=pickle.load(open('Heart_model.sav','rb'))
 parkinson_model=pickle.load(open('Parkinson_model.sav','rb'))
 Breast_Cancer_model=pickle.load(open('Breast_model.sav','rb'))
+calories_model=pickle.load(open('calories_model.sav','rb'))
+
 #sidebar for navigate
 with st.sidebar:
     selected=option_menu('Disease Prediction System',
                          ['Diabetes Prediction',
                           'Parkinson Disease Prediction',
                           'Breast Cancer',
-                          'Heart Prediction'
+                          'Heart Prediction',
+                          'Calories Burnt Prediction'
                           ],
                          
-                         icons=['activity','person','asterisk','heart'],
+                         icons=['activity','person','asterisk','heart','droplet'],
                          
                          default_index = 0)
     
@@ -78,7 +80,7 @@ if (selected == 'Heart Prediction'):
     if st.button('Heart Disease Test Result'):
         heart_prediction = heart_model.predict([[age, sex, cp, trestbps, chol, fbs, restecg,thalach,exang,oldpeak,slope,ca,thal]])                          
         
-        if (heart_prediction[0] == 1):
+        if (heart_prediction[0]):
           heart_diagnosis = 'The person is having heart disease'
         else:
           heart_diagnosis = 'The person does not have any heart disease'
@@ -176,3 +178,27 @@ if(selected == 'Breast Cancer'):
           Breast_diagnosis = 'The Breast cancer is Malignant'
         
     st.success(Breast_diagnosis)
+    
+if(selected == 'Calories Burnt Prediction'):
+      st.title("Calories Burnt Prediction")
+      Gender=st.text_input("Gender")
+      Age=st.text_input("Age")
+      Height=st.text_input("Height")
+      Weight=st.text_input("Weight")
+      Duration=st.text_input("Workout Duration")
+      Heart_Rate=st.text_input("Heart Rate")
+      Body_Temp=st.text_input("Body Temperature")
+      
+      calories_diagnosis = ''
+    
+    # creating a button for Prediction
+    
+      if st.button('Calories burnt'):
+        calories_prediction = calories_model.predict([[Gender,Age,Height,Weight,Duration,Heart_Rate,Body_Temp]])                          
+        
+        if (calories_prediction[0]):
+          calories_diagnosis = "The calories burnt for the first individual in the dataset is predicted as {}".format(calories_prediction[0])
+        else:
+          calories_diagnosis = "The calories burnt for the first individual in the dataset is predicted as {}".format(calories_prediction[0])
+        
+      st.success(calories_diagnosis)
